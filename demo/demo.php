@@ -3,8 +3,8 @@
 /**
  * @Author: mehedi
  * @Date:   2019-09-15 13:35:30
- * @Last Modified by:   mehedi
- * @Last Modified time: 2019-09-16 22:30:01
+ * @Last Modified by:   Coder-Mehedi
+ * @Last Modified time: 2019-09-17 14:04:13
  */
 /**
  * Plugin Name: demo
@@ -90,3 +90,27 @@ EOD;
 	return $map;
 }
 add_shortcode( 'gmap', 'gmap_shortcode_callback' );
+
+
+
+function demo_button_shortcode_callback($attr, $content) {
+	$default = array(
+		'title' => __("Button", 'mh-qrcode'),
+		'url' => ''
+	);
+
+	$attributes = shortcode_atts( $default, $attr );
+	$markup = sprintf('<a href="%s" class="btn"> %s </a>',
+		$attributes['url'],
+		do_shortcode( $content )
+		 );
+	return $markup;
+}
+
+add_shortcode( 'button', 'demo_button_shortcode_callback' );
+
+function uc_callback($attr, $content) {
+	return strtoupper(do_shortcode( $content ));
+}
+
+add_shortcode( 'uc', 'uc_callback' );

@@ -3,8 +3,8 @@
 /**
  * @Author: mehedi
  * @Date:   2019-09-13 23:47:09
- * @Last Modified by:   mehedi
- * @Last Modified time: 2019-09-16 17:37:11
+ * @Last Modified by:   Coder-Mehedi
+ * @Last Modified time: 2019-09-17 14:04:09
  */
 /**
  * Plugin Name: QRCode Gen
@@ -17,21 +17,6 @@
  * Text Domain: mh-qrcode
  * Domain Path: /languages/
  */
-
-function demo_button_shortcode_callback($attr) {
-	$default = array(
-		'title' => __("Button", 'mh-qrcode'), 
-		'url' => ''
-	);
-
-	$attributes = shortcode_atts( $default, $attr );
-	$markup = sprintf('<a href="%s" class="btn"> %s </a>', $attributes['url'], $attributes['title'] );
-	return $markup;
-}
-
-add_shortcode( 'button', 'demo_button_shortcode_callback' );
-
-
 
 
 function qrcode_assets($screen) {
