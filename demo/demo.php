@@ -4,7 +4,7 @@
  * @Author: mehedi
  * @Date:   2019-09-15 13:35:30
  * @Last Modified by:   Coder-Mehedi
- * @Last Modified time: 2019-09-17 14:04:13
+ * @Last Modified time: 2019-09-18 17:18:51
  */
 /**
  * Plugin Name: demo
@@ -22,6 +22,9 @@
 function demo_load_textdomain() {
 	load_plugin_textdomain( 'demo', false, dirname(__FILE__)."/languages" );
 }
+
+
+add_action( 'plugins_loaded', 'demo_load_textdomain' );
 
 
 function demo_custom_footer_text($text) {
