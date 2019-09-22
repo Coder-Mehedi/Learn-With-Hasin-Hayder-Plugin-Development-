@@ -4,7 +4,7 @@
  * @Author: mehedi
  * @Date:   2019-09-15 13:35:30
  * @Last Modified by:   Coder-Mehedi
- * @Last Modified time: 2019-09-18 17:18:51
+ * @Last Modified time: 2019-09-22 17:07:09
  */
 /**
  * Plugin Name: demo
@@ -70,11 +70,14 @@ require_once 'our_menu.php';
 
 
 function gmap_shortcode_callback($attr) {
+	$options = get_option( 'optionsdemo_settings' );
+
+
 	$default = array(
-		'place' => 'Dhaka',
-		'width' => '100%',
-		'height' => '450',
-		'zoom' => 14
+		'place' => $options['optionsdemo_text_field_0'] ? $options['optionsdemo_text_field_0'] : 'Dhaka',
+		'width' => $options['optionsdemo_text_field_3'] ? $options['optionsdemo_text_field_3'] : '100%',
+		'height' => $options['optionsdemo_text_field_4'] ? $options['optionsdemo_text_field_4'] : 450,
+		'zoom' => $options['optionsdemo_text_field_2'] ? $options['optionsdemo_text_field_2'] : 14
 	);
 
 	$params = shortcode_atts( $default, $attr );

@@ -4,7 +4,7 @@
  * @Author: Coder-Mehedi
  * @Date:   2019-09-18 13:37:44
  * @Last Modified by:   Coder-Mehedi
- * @Last Modified time: 2019-09-19 16:44:41
+ * @Last Modified time: 2019-09-20 12:57:16
  */
 /**
  * Plugin Name: Column Demo
@@ -61,5 +61,4 @@ function coldemo_sortable_column($columns) {
 	return $columns;
 }
 // add_filter( 'manage_edit-post_sortable_columns', 'coldemo_sortable_column' );
-
 
