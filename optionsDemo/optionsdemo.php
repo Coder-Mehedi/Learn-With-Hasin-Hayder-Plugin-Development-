@@ -4,7 +4,7 @@
  * @Author: Coder-Mehedi
  * @Date:   2019-09-22 15:04:12
  * @Last Modified by:   Coder-Mehedi
- * @Last Modified time: 2019-09-22 17:13:42
+ * @Last Modified time: 2019-09-22 21:30:58
  */
 
 /**
@@ -19,6 +19,7 @@
  * Domain Path: /languages/
  */
 
+require_once 'options-demo-form.php';
 
 function actionsdemo_bootstrap() {
 	load_plugin_textdomain( 'coldemo', false, dirname(__FILE__)."/languages" );
