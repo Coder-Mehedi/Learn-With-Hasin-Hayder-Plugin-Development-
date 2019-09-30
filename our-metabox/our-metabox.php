@@ -102,9 +102,9 @@ class OurMetaBox {
 	}
 
 	function omb_image_info($post) {
-		$image_id = get_post_meta( $post->ID, 'omb_image_id',true );
-		$image_id = get_post_meta( $post->ID, 'omb_image_url',true );
-		
+		$image_id = esc_attr(get_post_meta( $post->ID, 'omb_image_id',true ));
+		$image_url = esc_attr(get_post_meta( $post->ID, 'omb_image_url',true ));
+
 		wp_nonce_field( 'omb_image', 'omb_image_nonce' );
 		$metabox_html = <<<MEHEDI
 <div class="fields">
@@ -114,8 +114,8 @@ class OurMetaBox {
 		</div>
 		<div class="input_c">
 			<button id="upload_image" class="button">Upload Image</button>
-			<input type="hidden" id="omb_image_id" name="omb_image_id" >
-			<input type="hidden" id="omb_image_url" name="omb_image_url" >
+			<input type="hidden" id="omb_image_id" name="omb_image_id" value={$image_id} >
+			<input type="hidden" id="omb_image_url" name="omb_image_url" value={$image_url}>
 			<div id="image-container"></div>
 		</div>
 		<div class="float_clear"></div>
