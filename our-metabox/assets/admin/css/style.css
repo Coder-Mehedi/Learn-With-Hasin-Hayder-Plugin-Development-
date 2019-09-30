@@ -1,0 +1,33 @@
+.fields {
+
+}
+
+.field_c {
+
+}
+
+.label_c {
+	width: 20%;
+	float: left;
+}
+
+.label_c label {
+	line-height: 35px;
+}
+
+.input_c {
+	width: 80%;
+	float: left;
+}
+
+.input_c input {
+	height: 30px;
+}
+
+.float_clear {
+	clear: both;
+}
+
+.button {
+	border: none;
+}
