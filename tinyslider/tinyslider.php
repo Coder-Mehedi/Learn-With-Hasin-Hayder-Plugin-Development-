@@ -4,7 +4,7 @@
  * @Author: Coder-Mehedi
  * @Date:   2019-09-17 13:12:06
  * @Last Modified by:   Coder-Mehedi
- * @Last Modified time: 2019-09-17 16:03:06
+ * @Last Modified time: 2019-09-29 16:08:37
  */
 /**
  * Plugin Name: TinySlider
@@ -35,7 +35,7 @@ add_action( 'init', 'tslider_init' );
 
 function tslider_assets() {
 	wp_enqueue_style( 'tinyslider-css', '//cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/tiny-slider.css', null, '1.0', 'all' );
-	wp_enqueue_script( 'tinyslider-js', '//cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.helper.ie8.js', null, '1.0', true );
+	wp_enqueue_script( 'tinyslider-js', '//cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js', null, '1.0', true );
 	wp_enqueue_script( 'tinyslider-main-js', plugin_dir_url( __FILE__ ).'/assets/js/main.js', array('jquery'), '1.0', true );
 }
 
@@ -78,10 +78,9 @@ function tslider_shortcode_tslide($args) {
 
 	$shortcode_output = <<<EOD
 <div>
-	<p><img src="{$image_src['0']}" alt="{$attributes['caption']}"</p>
+	<p><img src="{$image_src[0]}" alt="{$attributes['caption']}"></p>
 	<p>{$attributes['caption']}</p>
 </div>
-}
 EOD;
 
 	return $shortcode_output;
