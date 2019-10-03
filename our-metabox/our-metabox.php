@@ -19,6 +19,7 @@ class OurMetaBox {
 		add_action( 'admin_menu', array($this, 'omb_add_metabox') );
 		add_action( 'save_post', array($this, 'omb_save_metabox') );
 		add_action( 'save_post', array($this, 'omb_save_image') );
+		add_action( 'save_post', array($this, 'omb_save_gallery') );
 
 		add_action( 'admin_enqueue_scripts', array($this, 'omb_admin_assets' ));
 	}
@@ -57,14 +58,26 @@ class OurMetaBox {
 	}
 
 	function omb_save_image($post_id) {
-	if(!$this->is_secured('omb_image_nonce', 'omb_image', $post_id)) {
-		return $post_id;
-	}
-	$image_id = isset($_POST['omb_image_id']) ? $_POST['omb_image_id'] : '';
-	$image_url = isset($_POST['omb_image_url']) ? $_POST['omb_image_url'] : '';
+		if(!$this->is_secured('omb_image_nonce', 'omb_image', $post_id)) {
+			return $post_id;
+		}
+		$image_id = isset($_POST['omb_image_id']) ? $_POST['omb_image_id'] : '';
+		$image_url = isset($_POST['omb_image_url']) ? $_POST['omb_image_url'] : '';
 
-	update_post_meta( $post_id, 'omb_image_id', $image_id );
-	update_post_meta( $post_id, 'omb_image_url', $image_url );
+		update_post_meta( $post_id, 'omb_image_id', $image_id );
+		update_post_meta( $post_id, 'omb_image_url', $image_url );
+	}
+
+
+	function omb_save_gallery($post_id) {
+		if(!$this->is_secured('omb_gallery_nonce', 'omb_gallery', $post_id)) {
+			return $post_id;
+		}
+		$image_id = isset($_POST['omb_images_id']) ? $_POST['omb_images_id'] : '';
+		$image_url = isset($_POST['omb_images_url']) ? $_POST['omb_images_url'] : '';
+
+		update_post_meta( $post_id, 'omb_images_id', $image_id );
+		update_post_meta( $post_id, 'omb_images_url', $image_url );
 	}
 
 	function omb_save_metabox($post_id) {
@@ -99,7 +112,10 @@ class OurMetaBox {
 		add_meta_box( 'omb_book_info', __('Book Info', 'our-metabox'), array($this, 'omb_book_info'), 'book' );
 
 		add_meta_box( 'omb_image_info', __('Image Info', 'our-metabox'), array($this, 'omb_image_info'), 'post' );
+
+		add_meta_box( 'omb_gallery_info', __('Gallery Info', 'our-metabox'), array($this, 'omb_gallery_info'), 'post' );
 	}
+
 
 	function omb_image_info($post) {
 		$image_id = esc_attr(get_post_meta( $post->ID, 'omb_image_id',true ));
@@ -120,13 +136,39 @@ class OurMetaBox {
 		</div>
 		<div class="float_clear"></div>
 	</div>
-
-	
-
 </div>
 MEHEDI;
-echo $metabox_html;
+
+		echo $metabox_html;
 	}
+
+function omb_gallery_info($post) {
+		$image_id = esc_attr(get_post_meta( $post->ID, 'omb_images_id',true ));
+		$image_url = esc_attr(get_post_meta( $post->ID, 'omb_images_url',true ));
+
+		wp_nonce_field( 'omb_gallery', 'omb_gallery_nonce' );
+		$metabox_html = <<<MEHEDI
+<div class="fields">
+	<div class="field_c">
+		<div class="label_c">
+			<label>Image</label>
+		</div>
+		<div class="input_c">
+			<button id="upload_images" class="button">Upload Images</button>
+			<input type="hidden" id="omb_images_id" name="omb_images_id" value={$image_id} >
+			<input type="hidden" id="omb_images_url" name="omb_images_url" value={$image_url}>
+			<div id="images-container"></div>
+		</div>
+		<div class="float_clear"></div>
+	</div>
+</div>
+MEHEDI;
+
+		echo $metabox_html;
+	}
+
+
+
 
 	function omb_display_metabox($post) {
 		$location = get_post_meta( $post->ID, 'omb_location', true );
@@ -163,7 +205,7 @@ echo $metabox_html;
 
 </div>
 MEHEDI;
-
+	$saved_colors = is_array($saved_colors) ? $saved_colors : array();
 	foreach ($colors as $color) {
 		$checked = in_array($color, $saved_colors) ? 'checked' : '';
 		$metabox_html .= <<<MEHEDI
